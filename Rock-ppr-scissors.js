@@ -5,7 +5,7 @@ let score= JSON.parse(localStorage.getItem('score')) || {
 };
 updateScoreElements();
 
-function compMovee(){
+function compMovee(){ 
   randomNum = Math.random();
   if(randomNum>=0 && randomNum <1/3){
     return'rock';
@@ -16,6 +16,23 @@ function compMovee(){
   else if(randomNum>=2/3 && randomNum<1){
     return'scissors';
   }
+}
+
+let isAutoPlay = false;
+let intervalId;
+function autoPlay(){
+  if(!isAutoPlay){
+    intervalId=setInterval(function (){
+      const plrMove = compMovee();
+      playGame(plrMove);
+    },500);
+    isAutoPlay=true;
+  }
+  else{
+    clearInterval(intervalId);
+    isAutoPlay=false;
+  }
+  
 }
 
 function playGame(plrMove){
