@@ -5,6 +5,7 @@ let score= JSON.parse(localStorage.getItem('score')) || {
 };
 updateScoreElements();
 
+
 function compMovee(){ 
   randomNum = Math.random();
   if(randomNum>=0 && randomNum <1/3){
@@ -34,6 +35,20 @@ function autoPlay(){
   }
   
 }
+
+
+document.querySelector(".js-rock-button").addEventListener('click',()=>{
+  playGame('rock');
+});
+
+document.querySelector(".js-paper-button").addEventListener('click',()=>{
+  playGame('paper');
+})
+document.querySelector(".js-scissors-button").addEventListener('click',()=>{
+  playGame('scissors');
+})
+
+
 
 function playGame(plrMove){
   const compMove = compMovee();
@@ -78,6 +93,7 @@ function playGame(plrMove){
   else{
     score.ties += 1 ;
   }
+  
 
   localStorage.setItem('score',JSON.stringify(score));
   updateScoreElements();
@@ -87,6 +103,7 @@ function playGame(plrMove){
 
 }
 
+console.log(plrMove);
 function updateScoreElements(){
   document.querySelector('.js-scores').innerHTML = `Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`;
 }
